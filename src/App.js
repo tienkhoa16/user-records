@@ -3,7 +3,7 @@ import { UserInfoForm } from "./components/UserInfoForm";
 
 function App() {
   const user = {
-    user_name: "Khoa",
+    name: "Khoa",
     age: 20,
     gender: "male",
     occupation: "student",
