@@ -1,0 +1,16 @@
+.user-info-form {
+  display: flex;
+  flex-direction: row;
+  margin: 1em;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  gap: 10px;
+}
+
+.form-labels {
+  text-align: left;
+}
