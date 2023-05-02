@@ -11,7 +11,6 @@ export const UserInfoForm = ({ field: { user_name, age, gender, occupation, inte
         <label>Gender</label>
         <label>Occupation</label>
         <label>Interests</label>
-        <Button label="Clear" />
       </div>
       <div className="form-column form-values">
         <input name="user-name" required value={user_name} />
