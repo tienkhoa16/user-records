@@ -3,7 +3,7 @@ import "./user-info-form.css";
 import { Button } from "./Button";
 import { useState } from "react";
 
-export const UserInfoForm = ({ field: { name, age, gender, occupation, interests } }) => {
+export const UserInfoForm = ({ field: { id, name, age, gender, occupation, interests } }) => {
   const [userName, setUserName] = useState(name);
   const [userAge, setUserAge] = useState(age);
   const [userGender, setUserGender] = useState(gender);
@@ -29,7 +29,7 @@ export const UserInfoForm = ({ field: { name, age, gender, occupation, interests
     e.preventDefault();
     console.log(
       "A user was submitted " +
-        Array([userName, userAge, userGender, userOccupation, userInterests])
+        Array([id, userName, userAge, userGender, userOccupation, userInterests])
     );
   };
 

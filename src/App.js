@@ -1,8 +1,10 @@
 import "./App.css";
+import { Header } from "./components/Header";
 import { UserInfoForm } from "./components/UserInfoForm";
 
 function App() {
   const user = {
+    id: 0,
     name: "Khoa",
     age: 20,
     gender: "male",
@@ -12,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>User-Record Management</h1>
+      <Header/>
       <UserInfoForm field={user}/>
     </div>
   );
