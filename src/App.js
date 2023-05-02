@@ -12,6 +12,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>User-Record Management</h1>
       <UserInfoForm field={user}/>
     </div>
   );

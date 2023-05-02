@@ -21,14 +21,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
 p,
 label {
   margin: 0;
   padding: 0;
   border: 0;
-  font-weight: normal;
-  font-style: normal;
+  font-weight: normal, bold;
+  font-style: normal, italic;
   font-size: 100%;
   line-height: 1;
   font-family: inherit;
@@ -219,8 +218,7 @@ textarea {
 @font-face {
   font-family: "percolate";
   src: url("./assets/icon/percolate.eot?-5w3um4");
-  src: url("./assets/icon/percolate.eot?#iefix5w3um4")
-      format("embedded-opentype"),
+  src: url("./assets/icon/percolate.eot?#iefix5w3um4") format("embedded-opentype"),
     url("./assets/icon/percolate.woff?5w3um4") format("woff"),
     url("./assets/icon/percolate.ttf?5w3um4") format("truetype"),
     url("./assets/icon/percolate.svg?5w3um4") format("svg");
