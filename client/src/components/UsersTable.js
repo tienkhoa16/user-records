@@ -4,7 +4,7 @@ import { useUsersContext } from "../contexts/UsersContext";
 import { Header } from "./Header";
 
 export const UsersTable = () => {
-  const { usersList, setUsersList } = useUsersContext();
+  const { usersList } = useUsersContext();
   return (
     <div>
       {usersList.length > 0 ? (

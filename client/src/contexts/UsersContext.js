@@ -6,28 +6,34 @@ const UsersContext = createContext();
 export const useUsersContext = () => useContext(UsersContext);
 
 export const UsersContextProvider = ({ children }) => {
-  const [usersList, setUsersList] = useState([]);
+  const [shouldFetchUsers, setShouldFetchUsers] = useState(true);
+  const [usersList, setUsersList] = useState(false);
+
+  const fetchUsers = async () => {
+    let res = await axios.get("http://localhost:8000/view", { timeout: 5000 });
+    if (res.data !== null) {
+      console.log("Users in database: " + JSON.stringify(res.data));
+      setUsersList(res.data);
+    } else {
+      console.log("There's no user in database.");
+    }
+  };
 
   useEffect(() => {
-    try {
-      console.log("Fetching users list from database ");
-
-      const fetchUsers = async () => {
-        let res = await axios.get("http://localhost:8000/view", { timeout: 5000 });
-        if (res.data !== null) {
-          console.log("Users in database: " + JSON.stringify(res.data));
-          setUsersList(res.data);
-        } else {
-          console.log("There's no user in database.");
-        }
-      };
-      fetchUsers();
-    } catch (err) {
-      console.log("Error getting users list " + err);
+    if (shouldFetchUsers) {
+      try {
+        console.log("Fetching users list from database ");
+        fetchUsers();
+        setShouldFetchUsers(false);
+      } catch (err) {
+        console.log("Error getting users list " + err);
+      }
     }
-  }, []);
+  }, [shouldFetchUsers]);
 
   return (
-    <UsersContext.Provider value={{ usersList, setUsersList }}>{children}</UsersContext.Provider>
+    <UsersContext.Provider value={{ usersList, setShouldFetchUsers }}>
+      {children}
+    </UsersContext.Provider>
   );
 };

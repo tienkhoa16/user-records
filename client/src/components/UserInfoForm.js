@@ -3,6 +3,7 @@ import "./user-info-form.css";
 import { Button } from "./Button";
 import { useState } from "react";
 import axios from "axios";
+import { useUsersContext } from "../contexts/UsersContext";
 
 export const UserInfoForm = ({ field: { id, name, age, gender, occupation, interests } }) => {
   const [userName, setUserName] = useState(name);
@@ -10,6 +11,8 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
   const [userGender, setUserGender] = useState(gender);
   const [userOccupation, setUserOccupation] = useState(occupation);
   const [userInterests, setUserInterests] = useState(interests);
+
+  const { setShouldFetchUsers } = useUsersContext();
 
   const handleChange = (e) => {
     console.log("Field " + e.target.name + " was changed to " + e.target.value);
@@ -34,18 +37,17 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
           Array([id, userName, userAge, userGender, userOccupation, userInterests])
       );
 
-      let res = await axios.post(
-        "http://localhost:8000/create",
-        {
-          name: userName,
-          age: userAge,
-          gender: userGender,
-          occupation: userOccupation,
-          interests: userInterests,
-        },
-        { timeout: 5000 }
-      );
+      const newProfile = {
+        name: userName,
+        age: userAge,
+        gender: userGender,
+        occupation: userOccupation,
+        interests: userInterests,
+      };
+
+      let res = await axios.post("http://localhost:8000/create", newProfile, { timeout: 5000 });
       if (res.status === 200) {
+        setShouldFetchUsers(true);
         alert("Succesfully created a user");
         clearAllFields();
       } else {
