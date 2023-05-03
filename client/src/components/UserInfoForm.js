@@ -1,31 +1,38 @@
 import React from "react";
 import "./user-info-form.css";
 import { Button } from "./Button";
-import { useState } from "react";
 import axios from "axios";
 import { useUsersContext } from "../contexts/UsersContext";
 
-export const UserInfoForm = ({ field: { id, name, age, gender, occupation, interests } }) => {
-  const [userName, setUserName] = useState(name);
-  const [userAge, setUserAge] = useState(age);
-  const [userGender, setUserGender] = useState(gender);
-  const [userOccupation, setUserOccupation] = useState(occupation);
-  const [userInterests, setUserInterests] = useState(interests);
+export const UserInfoForm = () => {
+  const {
+    formId,
+    formName,
+    setFormName,
+    formAge,
+    setFormAge,
+    formGender,
+    setFormGender,
+    formOccupation,
+    setFormOccupation,
+    formInterests,
+    setFormInterests,
+  } = useUsersContext();
 
   const { setShouldFetchUsers } = useUsersContext();
 
   const handleChange = (e) => {
     console.log("Field " + e.target.name + " was changed to " + e.target.value);
     if (e.target.name === "user-name") {
-      setUserName(e.target.value);
+      setFormName(e.target.value);
     } else if (e.target.name === "user-age") {
-      setUserAge(parseInt(e.target.value));
+      setFormAge(parseInt(e.target.value));
     } else if (e.target.name === "user-gender") {
-      setUserGender(e.target.value);
+      setFormGender(e.target.value);
     } else if (e.target.name === "user-occupation") {
-      setUserOccupation(e.target.value);
+      setFormOccupation(e.target.value);
     } else if (e.target.name === "user-interests") {
-      setUserInterests(e.target.value);
+      setFormInterests(e.target.value);
     }
   };
 
@@ -34,15 +41,15 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
     try {
       console.log(
         "A user was submitted " +
-          Array([id, userName, userAge, userGender, userOccupation, userInterests])
+          Array([formName, formAge, formGender, formOccupation, formInterests])
       );
 
       const newProfile = {
-        name: userName,
-        age: userAge,
-        gender: userGender,
-        occupation: userOccupation,
-        interests: userInterests,
+        name: formName,
+        age: formAge,
+        gender: formGender,
+        occupation: formOccupation,
+        interests: formInterests,
       };
 
       let res = await axios.post("http://localhost:8000/create", newProfile, { timeout: 5000 });
@@ -59,16 +66,17 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
   };
 
   const clearAllFields = () => {
-    setUserName("");
-    setUserAge("");
-    setUserGender("");
-    setUserOccupation("");
-    setUserInterests("");
+    setFormName("");
+    setFormAge("");
+    setFormGender("");
+    setFormOccupation("");
+    setFormInterests("");
   };
 
   return (
     <form className="user-info-form" onSubmit={handleSubmit}>
       <div className="form-column form-labels">
+        {formId && <label>ID</label>}
         <label>Name</label>
         <label>Age</label>
         <label>Gender</label>
@@ -76,12 +84,13 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
         <label>Interests</label>
       </div>
       <div className="form-column form-values">
-        <input name="user-name" required value={userName} onChange={handleChange} />
+        {formId && <input name="user-id" value={formId} readOnly></input>}
+        <input name="user-name" required value={formName} onChange={handleChange} />
         <input
           name="user-age"
           type="number"
           required
-          value={userAge}
+          value={formAge}
           onChange={handleChange}
           min={0}
         />
@@ -92,7 +101,7 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
               type="radio"
               value="male"
               required
-              checked={userGender === "male"}
+              checked={formGender === "male"}
               onChange={handleChange}
             />
             Male
@@ -102,7 +111,7 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
               name="user-gender"
               type="radio"
               value="female"
-              checked={userGender === "female"}
+              checked={formGender === "female"}
               onChange={handleChange}
             />
             Female
@@ -112,15 +121,15 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
               name="user-gender"
               type="radio"
               value="other"
-              checked={userGender === "other"}
+              checked={formGender === "other"}
               onChange={handleChange}
             />
             Other
           </label>
         </div>
-        <input name="user-occupation" required value={userOccupation} onChange={handleChange} />
-        <input name="user-interests" required value={userInterests} onChange={handleChange} />
-        <Button label="Create" primary={true} type="submit" />
+        <input name="user-occupation" required value={formOccupation} onChange={handleChange} />
+        <input name="user-interests" required value={formInterests} onChange={handleChange} />
+        <Button label={formId? "Update" : "Create"} primary={true} type="submit" />
       </div>
     </form>
   );

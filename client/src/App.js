@@ -5,20 +5,11 @@ import { UsersTable } from "./components/UsersTable";
 import { UsersContextProvider } from "./contexts/UsersContext";
 
 function App() {
-  const user = {
-    id: 0,
-    name: "Khoa",
-    age: "20",
-    gender: "male",
-    occupation: "student",
-    interests: "sports",
-  };
-
   return (
     <div className="App">
       <UsersContextProvider>
         <Header title="User-Record Management" />
-        <UserInfoForm field={user} />
+        <UserInfoForm />
         <UsersTable />
       </UsersContextProvider>
     </div>

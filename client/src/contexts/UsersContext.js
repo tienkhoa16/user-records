@@ -4,11 +4,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 const UsersContext = createContext({
   usersList: [],
   setShouldFetchUsers: () => {},
+  formId: "",
   formName: "",
   formAge: "",
   formGender: "",
   formOccupation: "",
   formInterests: "",
+  setFormId: () => {},
   setFormName: () => {},
   setFormAge: () => {},
   setFormGender: () => {},
@@ -22,6 +24,7 @@ export const UsersContextProvider = ({ children }) => {
   const [shouldFetchUsers, setShouldFetchUsers] = useState(true);
   const [usersList, setUsersList] = useState(false);
 
+  const [formId, setFormId] = useState("");
   const [formName, setFormName] = useState("");
   const [formAge, setFormAge] = useState("");
   const [formGender, setFormGender] = useState("");
@@ -53,6 +56,8 @@ export const UsersContextProvider = ({ children }) => {
   let values = {
     usersList,
     setShouldFetchUsers,
+    formId,
+    setFormId,
     formName,
     setFormName,
     formAge,

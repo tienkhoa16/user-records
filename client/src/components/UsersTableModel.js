@@ -7,7 +7,15 @@ import axios from "axios";
 import { useUsersContext } from "../contexts/UsersContext";
 
 export const UsersTableModel = ({ users }) => {
-  const { setShouldFetchUsers } = useUsersContext();
+  const {
+    setShouldFetchUsers,
+    setFormId,
+    setFormName,
+    setFormAge,
+    setFormGender,
+    setFormOccupation,
+    setFormInterests,
+  } = useUsersContext();
 
   const handleDelete = async (userId) => {
     console.log("Send delete request of user id " + userId);
@@ -29,8 +37,14 @@ export const UsersTableModel = ({ users }) => {
   };
 
   const handleModify = async (id, name, age, gender, occupation, interests) => {
-
-  }
+    console.log("Modify user id " + id);
+    setFormId(id);
+    setFormName(name);
+    setFormAge(age);
+    setFormGender(gender);
+    setFormOccupation(occupation);
+    setFormInterests(interests);
+  };
 
   return (
     <table>
