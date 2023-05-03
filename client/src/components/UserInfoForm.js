@@ -120,7 +120,7 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
         </div>
         <input name="user-occupation" required value={userOccupation} onChange={handleChange} />
         <input name="user-interests" required value={userInterests} onChange={handleChange} />
-        <Button label="Submit" primary={true} type="submit" />
+        <Button label="Create" primary={true} type="submit" />
       </div>
     </form>
   );
