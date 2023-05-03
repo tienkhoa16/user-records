@@ -28,6 +28,10 @@ export const UsersTableModel = ({ users }) => {
     }
   };
 
+  const handleModify = async (id, name, age, gender, occupation, interests) => {
+
+  }
+
   return (
     <table>
       <thead>
@@ -51,7 +55,9 @@ export const UsersTableModel = ({ users }) => {
             <td>{occupation}</td>
             <td>{interests}</td>
             <td className="action-button">
-              <IconButton>
+              <IconButton
+                onClick={() => handleModify(id, name, age, gender, occupation, interests)}
+              >
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => handleDelete(id)}>
