@@ -16,6 +16,7 @@ const UsersContext = createContext({
   setFormGender: () => {},
   setFormOccupation: () => {},
   setFormInterests: () => {},
+  clearAllFields: () => {},
 });
 
 export const useUsersContext = () => useContext(UsersContext);
@@ -53,6 +54,15 @@ export const UsersContextProvider = ({ children }) => {
     }
   }, [shouldFetchUsers]);
 
+  const clearAllFields = () => {
+    setFormId("");
+    setFormName("");
+    setFormAge("");
+    setFormGender("");
+    setFormOccupation("");
+    setFormInterests("");
+  };
+
   let values = {
     usersList,
     setShouldFetchUsers,
@@ -68,6 +78,7 @@ export const UsersContextProvider = ({ children }) => {
     setFormOccupation,
     formInterests,
     setFormInterests,
+    clearAllFields
   };
 
   return <UsersContext.Provider value={values}>{children}</UsersContext.Provider>;

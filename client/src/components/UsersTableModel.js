@@ -15,6 +15,7 @@ export const UsersTableModel = ({ users }) => {
     setFormGender,
     setFormOccupation,
     setFormInterests,
+    clearAllFields
   } = useUsersContext();
 
   const handleDelete = async (userId) => {
@@ -28,6 +29,7 @@ export const UsersTableModel = ({ users }) => {
       if (res.status === 200) {
         setShouldFetchUsers(true);
         alert("Deleted user ID " + userId);
+        clearAllFields();
       } else {
         alert("Error deleting from server");
       }

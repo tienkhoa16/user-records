@@ -17,6 +17,7 @@ export const UserInfoForm = () => {
     setFormOccupation,
     formInterests,
     setFormInterests,
+    clearAllFields,
   } = useUsersContext();
 
   const { setShouldFetchUsers } = useUsersContext();
@@ -36,7 +37,7 @@ export const UserInfoForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
     try {
       console.log(
@@ -65,16 +66,40 @@ export const UserInfoForm = () => {
     }
   };
 
-  const clearAllFields = () => {
-    setFormName("");
-    setFormAge("");
-    setFormGender("");
-    setFormOccupation("");
-    setFormInterests("");
+  const handleModify = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(
+        "User data are modified " +
+          Array([formId, formName, formAge, formGender, formOccupation, formInterests])
+      );
+
+      const modifiedProfile = {
+        id: formId,
+        name: formName,
+        age: formAge,
+        gender: formGender,
+        occupation: formOccupation,
+        interests: formInterests,
+      };
+
+      let res = await axios.put("http://localhost:8000/modify", modifiedProfile, {
+        timeout: 5000,
+      });
+      if (res.status === 200) {
+        setShouldFetchUsers(true);
+        alert("Succesfully modified user " + formId);
+        clearAllFields();
+      } else {
+        alert("Error sending data to the server");
+      }
+    } catch (err) {
+      console.log("Error submitting the form " + err);
+    }
   };
 
   return (
-    <form className="user-info-form" onSubmit={handleSubmit}>
+    <form className="user-info-form" onSubmit={formId ? handleModify : handleCreate}>
       <div className="form-column form-labels">
         {formId && <label>ID</label>}
         <label>Name</label>
@@ -129,7 +154,7 @@ export const UserInfoForm = () => {
         </div>
         <input name="user-occupation" required value={formOccupation} onChange={handleChange} />
         <input name="user-interests" required value={formInterests} onChange={handleChange} />
-        <Button label={formId? "Update" : "Create"} primary={true} type="submit" />
+        <Button label={formId ? "Update" : "Create"} primary={true} type="submit" />
       </div>
     </form>
   );

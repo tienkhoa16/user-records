@@ -72,5 +72,38 @@ app.delete("/delete", async (req, res) => {
   }
 });
 
+app.put("/modify", async (req, res) => {
+  const { id, name, age, gender, occupation, interests } = req.body;
+  console.log(
+    "Modify user id " +
+      id +
+      " to " +
+      JSON.stringify({ id, name, age, gender, occupation, interests })
+  );
+  try {
+    const result = await userModel.updateOne(
+      { id: id },
+      {
+        $set: {
+          id: id,
+          name: name,
+          age: age,
+          gender: gender,
+          occupation: occupation,
+          interests: interests,
+        },
+      },
+    );
+    if (result.matchedCount > 0) {
+      console.log("Successfully modified user ID " + JSON.stringify(id));
+      res.sendStatus(200);
+    } else {
+      console.log("No documents matched the ID. Modified 0 documents.");
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
