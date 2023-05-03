@@ -1,13 +1,32 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const UsersContext = createContext({ usersList: [], setShouldFetchUsers: () => {} });
+const UsersContext = createContext({
+  usersList: [],
+  setShouldFetchUsers: () => {},
+  formName: "",
+  formAge: "",
+  formGender: "",
+  formOccupation: "",
+  formInterests: "",
+  setFormName: () => {},
+  setFormAge: () => {},
+  setFormGender: () => {},
+  setFormOccupation: () => {},
+  setFormInterests: () => {},
+});
 
 export const useUsersContext = () => useContext(UsersContext);
 
 export const UsersContextProvider = ({ children }) => {
   const [shouldFetchUsers, setShouldFetchUsers] = useState(true);
   const [usersList, setUsersList] = useState(false);
+
+  const [formName, setFormName] = useState("");
+  const [formAge, setFormAge] = useState("");
+  const [formGender, setFormGender] = useState("");
+  const [formOccupation, setFormOccupation] = useState("");
+  const [formInterests, setFormInterests] = useState("");
 
   const fetchUsers = async () => {
     let res = await axios.get("http://localhost:8000/view", { timeout: 5000 });
@@ -31,9 +50,20 @@ export const UsersContextProvider = ({ children }) => {
     }
   }, [shouldFetchUsers]);
 
-  return (
-    <UsersContext.Provider value={{ usersList, setShouldFetchUsers }}>
-      {children}
-    </UsersContext.Provider>
-  );
+  let values = {
+    usersList,
+    setShouldFetchUsers,
+    formName,
+    setFormName,
+    formAge,
+    setFormAge,
+    formGender,
+    setFormGender,
+    formOccupation,
+    setFormOccupation,
+    formInterests,
+    setFormInterests,
+  };
+
+  return <UsersContext.Provider value={values}>{children}</UsersContext.Provider>;
 };
