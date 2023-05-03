@@ -46,5 +46,15 @@ app.post("/create", async (req, res) => {
   }
 });
 
+app.get("/view", async (req, res) => {
+  console.log("Received get user records request");
+  const users = await userModel.find({});
+  try {
+    res.send(users);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

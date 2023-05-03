@@ -1,31 +1,20 @@
-import React from "react";
-import "./users-table.css";
+import { React } from "react";
+import { UsersTableModel } from "./UsersTableModel";
+import { useUsersContext } from "../contexts/UsersContext";
+import { Header } from "./Header";
 
-export const UsersTable = ({ users }) => {
+export const UsersTable = () => {
+  const { usersList, setUsersList } = useUsersContext();
   return (
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Age</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Occupation</th>
-          <th scope="col">Interests</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map(({ id, name, age, gender, occupation, interests }) => (
-          <tr>
-            <th scope="row">{id}</th>
-            <td>{name}</td>
-            <td>{age}</td>
-            <td>{gender}</td>
-            <td>{occupation}</td>
-            <td>{interests}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      {usersList.length > 0 ? (
+        <div>
+          <Header title="Records" />
+          <UsersTableModel users={usersList} />
+        </div>
+      ) : (
+        <text>There are no users in the database</text>
+      )}
+    </div>
   );
 };

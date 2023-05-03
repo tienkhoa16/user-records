@@ -1,12 +1,12 @@
 import React from "react";
-import { UsersTable } from "../components/UsersTable";
+import { UsersTableModel } from "../components/UsersTableModel";
 
 export default {
-  title: "Components/UsersTable",
-  component: UsersTable,
+  title: "Components/UsersTableModel",
+  component: UsersTableModel,
 };
 
-const Template = (args) => <UsersTable {...args} />;
+const Template = (args) => <UsersTableModel {...args} />;
 
 export const DefaultTable = Template.bind({});
 DefaultTable.args = {
