@@ -6,7 +6,7 @@ function App() {
   const user = {
     id: 0,
     name: "Khoa",
-    age: 20,
+    age: "20",
     gender: "male",
     occupation: "student",
     interests: "sports",

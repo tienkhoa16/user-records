@@ -2,6 +2,7 @@ import React from "react";
 import "./user-info-form.css";
 import { Button } from "./Button";
 import { useState } from "react";
+import axios from "axios";
 
 export const UserInfoForm = ({ field: { id, name, age, gender, occupation, interests } }) => {
   const [userName, setUserName] = useState(name);
@@ -25,14 +26,34 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      "A user was submitted " +
-        Array([id, userName, userAge, userGender, userOccupation, userInterests])
-    );
-    alert("Succesfully created a user");
-    clearAllFields();
+    try {
+      console.log(
+        "A user was submitted " +
+          Array([id, userName, userAge, userGender, userOccupation, userInterests])
+      );
+
+      let res = await axios.post(
+        "http://localhost:8000/create",
+        {
+          name: userName,
+          age: userAge,
+          gender: userGender,
+          occupation: userOccupation,
+          interests: userInterests,
+        },
+        { timeout: 5000 }
+      );
+      if (res.status === 200) {
+        alert("Succesfully created a user");
+        clearAllFields();
+      } else {
+        alert("Error sending data to the server");
+      }
+    } catch (err) {
+      console.log("Error submitting the form " + err);
+    }
   };
 
   const clearAllFields = () => {
@@ -95,18 +116,8 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
             Other
           </label>
         </div>
-        <input
-          name="user-occupation"
-          required
-          value={userOccupation}
-          onChange={handleChange}
-        />
-        <input
-          name="user-interests"
-          required
-          value={userInterests}
-          onChange={handleChange}
-        />
+        <input name="user-occupation" required value={userOccupation} onChange={handleChange} />
+        <input name="user-interests" required value={userInterests} onChange={handleChange} />
         <Button label="Submit" primary={true} type="submit" />
       </div>
     </form>
