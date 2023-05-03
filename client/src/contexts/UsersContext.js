@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const UsersContext = createContext();
+const UsersContext = createContext({ usersList: [], setShouldFetchUsers: () => {} });
 
 export const useUsersContext = () => useContext(UsersContext);
 
