@@ -31,6 +31,16 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
       "A user was submitted " +
         Array([id, userName, userAge, userGender, userOccupation, userInterests])
     );
+    alert("Succesfully created a user");
+    clearAllFields();
+  };
+
+  const clearAllFields = () => {
+    setUserName("");
+    setUserAge("");
+    setUserGender("");
+    setUserOccupation("");
+    setUserInterests("");
   };
 
   return (
@@ -43,13 +53,14 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
         <label>Interests</label>
       </div>
       <div className="form-column form-values">
-        <input name="user-name" required defaultValue={userName} onChange={handleChange} />
+        <input name="user-name" required value={userName} onChange={handleChange} />
         <input
           name="user-age"
           type="number"
           required
-          defaultValue={userAge}
+          value={userAge}
           onChange={handleChange}
+          min={0}
         />
         <div style={{ display: "flex", flexDirection: "row" }}>
           <label>
@@ -87,13 +98,13 @@ export const UserInfoForm = ({ field: { id, name, age, gender, occupation, inter
         <input
           name="user-occupation"
           required
-          defaultValue={userOccupation}
+          value={userOccupation}
           onChange={handleChange}
         />
         <input
           name="user-interests"
           required
-          defaultValue={userInterests}
+          value={userInterests}
           onChange={handleChange}
         />
         <Button label="Submit" primary={true} type="submit" />
