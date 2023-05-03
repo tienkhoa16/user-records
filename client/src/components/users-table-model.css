@@ -31,3 +31,8 @@ th {
 td {
   text-align: center;
 }
+
+.action-button {
+  font-weight: bold;
+  cursor: pointer;
+}

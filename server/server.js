@@ -56,5 +56,21 @@ app.get("/view", async (req, res) => {
   }
 });
 
+app.delete("/delete", async (req, res) => {
+  const { id } = req.body;
+  console.log("Delete user id " + id);
+  try {
+    const result = await userModel.findOneAndDelete({ id: id });
+    if (result !== null) {
+      console.log("Successfully deleted " + JSON.stringify(result));
+      res.sendStatus(200);
+    } else {
+      console.log("No documents matched the query. Deleted 0 documents.");
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
