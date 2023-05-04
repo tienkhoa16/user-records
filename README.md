@@ -4,6 +4,12 @@
 
 The objective of this project is to create a comprehensive user record management system with CRUD (Create, Read, Update, Delete) functionality using the MERN stack. The system is leverages the usage of MongoDB, Express.js, React.js, and Node.js to provide a seamless user experience.
 
+## Demo
+
+<p align="center">
+    <img alt="REST APi" src="./docs/demo.gif" width=600/>
+</p>
+
 ## Quick Start
 
 1. **Prerequisite**
@@ -107,6 +113,7 @@ When a user modifies a profile by clicking the Modify button in `UsersTable`, th
 </p>
 
 In the `profile-management` database, there are two collections:
+
 - `profiles`: This collection stores all the user profile documents.
 - `counters`: This collection stores the sequence number of the documents added to the `profiles` collection. Upon receiving a POST request, `seq` value will be automatically incremented by 1. This `seq` value is then used to auto-assign an ID to each profile created in the `profiles` collection.
 
