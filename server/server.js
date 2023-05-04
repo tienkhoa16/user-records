@@ -3,16 +3,17 @@ const cors = require("cors");
 
 const mongoose = require("mongoose");
 const { userModel, counterModel } = require("./models");
+const logger = require("./logger");
 
 const url = "mongodb://127.0.0.1:27017/profile-management";
 mongoose.connect(url, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.once("open", (_) => {
-  console.log("Database connected:", url);
+  logger.info("Database connected: " + url);
 });
 
 db.on("error", (err) => {
-  console.error("Connection error:", err);
+  logger.error("Connection error:", err);
 });
 
 const app = express();
@@ -22,7 +23,7 @@ app.use(express.json());
 
 app.post("/create", async (req, res) => {
   const { name, age, gender, occupation, interests } = req.body;
-  console.log("Received post request to create a new user " + JSON.stringify(req.body));
+  logger.info("Received post request to create a new user " + JSON.stringify(req.body));
 
   let counterId = await counterModel.findOneAndUpdate(
     { id: "autoval" },
@@ -39,42 +40,47 @@ app.post("/create", async (req, res) => {
     interests: interests,
   });
   try {
+    logger.info("Successfully created profile " + JSON.stringify(profile));
     profile.save();
     res.sendStatus(200);
   } catch (e) {
+    logger.error("Error while creating profile " + e);
     res.status(500).send(e);
   }
 });
 
 app.get("/view", async (req, res) => {
-  console.log("Received get user records request");
+  logger.info("Received get all user records request");
   const users = await userModel.find({});
   try {
     res.send(users);
+    logger.info("Successfully sent back all user records");
   } catch (e) {
+    logger.error("Error while getting user records " + e);
     res.status(500).send(e);
   }
 });
 
 app.delete("/delete", async (req, res) => {
   const { id } = req.body;
-  console.log("Delete user id " + id);
+  logger.info("Delete user id " + id);
   try {
     const result = await userModel.findOneAndDelete({ id: id });
     if (result !== null) {
-      console.log("Successfully deleted " + JSON.stringify(result));
+      logger.info("Successfully deleted " + JSON.stringify(result));
       res.sendStatus(200);
     } else {
-      console.log("No documents matched the query. Deleted 0 documents.");
+      logger.error("No documents matched the query. Deleted 0 documents.");
     }
   } catch (e) {
+    logger.error("Error while deleting user record " + e);
     res.status(500).send(e);
   }
 });
 
 app.put("/modify", async (req, res) => {
   const { id, name, age, gender, occupation, interests } = req.body;
-  console.log(
+  logger.info(
     "Modify user id " +
       id +
       " to " +
@@ -92,18 +98,19 @@ app.put("/modify", async (req, res) => {
           occupation: occupation,
           interests: interests,
         },
-      },
+      }
     );
     if (result.matchedCount > 0) {
-      console.log("Successfully modified user ID " + JSON.stringify(id));
+      logger.info("Successfully modified user ID " + JSON.stringify(id));
       res.sendStatus(200);
     } else {
-      console.log("No documents matched the ID. Modified 0 documents.");
+      logger.error("No documents matched the ID. Modified 0 documents.");
     }
   } catch (e) {
+    logger.error("Error while modifying user record " + e);
     res.status(500).send(e);
   }
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+app.listen(PORT, logger.info(`Server started on port ${PORT}`));
