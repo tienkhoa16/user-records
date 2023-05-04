@@ -4,7 +4,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 import axios from "axios";
-import { useUsersContext } from "../contexts/UsersContext";
+import { useUsersContext } from "../common/contexts/UsersContext";
 
 export const UsersTableModel = ({ users }) => {
   const {
@@ -15,7 +15,7 @@ export const UsersTableModel = ({ users }) => {
     setFormGender,
     setFormOccupation,
     setFormInterests,
-    clearAllFields
+    clearAllFields,
   } = useUsersContext();
 
   const handleDelete = async (userId) => {

@@ -1,7 +1,7 @@
 import { React } from "react";
 import { UsersTableModel } from "./UsersTableModel";
-import { useUsersContext } from "../contexts/UsersContext";
 import { Header } from "./Header";
+import { useUsersContext } from "../common/contexts/UsersContext";
 
 export const UsersTable = () => {
   const { usersList } = useUsersContext();

@@ -1,8 +1,8 @@
 import "./App.css";
+import { UsersContextProvider } from "./common/contexts/UsersContext";
 import { Header } from "./components/Header";
 import { UserInfoForm } from "./components/UserInfoForm";
 import { UsersTable } from "./components/UsersTable";
-import { UsersContextProvider } from "./contexts/UsersContext";
 
 function App() {
   return (

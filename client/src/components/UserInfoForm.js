@@ -2,7 +2,8 @@ import React from "react";
 import "./user-info-form.css";
 import { Button } from "./Button";
 import axios from "axios";
-import { useUsersContext } from "../contexts/UsersContext";
+import { useUsersContext } from "../common/contexts/UsersContext";
+import { removeWhitespaces } from "../common/utils/utils";
 
 export const UserInfoForm = () => {
   const {
