@@ -2,6 +2,9 @@ const { format, createLogger, transports } = require("winston");
 const { combine, timestamp, label, prettyPrint } = format;
 const CATEGORY = "node backend";
 
+/**
+ * Logger using Winston to write loggings to logs/backend.log.
+ */
 const logger = createLogger({
   level: "debug",
   format: combine(
