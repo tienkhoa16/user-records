@@ -1,16 +1,8 @@
 {
-  "name": "intro-storybook-react-template",
+  "name": "user-records-management",
   "version": "0.1.0",
-  "description": "Starter template to get up and running quickly with React and Storybook",
-  "author": "Chromatic <https://chromatic.com/>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chromaui/intro-storybook-react-template"
-  },
-  "bugs": {
-    "url": "https://github.com/chromaui/intro-storybook-react-template/issues"
-  },
-  "license": "MIT",
+  "description": "A simple user profile management system allowing CRUD operations",
+  "author": "Tien Khoa Nguyen <https://ntkhoa.com/>",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
