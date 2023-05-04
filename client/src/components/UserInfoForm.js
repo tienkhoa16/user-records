@@ -24,17 +24,31 @@ export const UserInfoForm = () => {
   const { setShouldFetchUsers } = useUsersContext();
 
   const handleChange = (e) => {
-    console.log("Field " + e.target.name + " was changed to " + e.target.value);
-    if (e.target.name === "user-name") {
-      setFormName(e.target.value);
-    } else if (e.target.name === "user-age") {
-      setFormAge(parseInt(e.target.value));
-    } else if (e.target.name === "user-gender") {
-      setFormGender(e.target.value);
-    } else if (e.target.name === "user-occupation") {
-      setFormOccupation(e.target.value);
-    } else if (e.target.name === "user-interests") {
-      setFormInterests(e.target.value);
+    const attribute = e.target.name;
+    const value = e.target.value;
+    console.log("Field " + attribute + " was changed to " + value);
+    if (attribute === "user-name") {
+      setFormName(value);
+    } else if (attribute === "user-age") {
+      setFormAge(parseInt(value));
+    } else if (attribute === "user-gender") {
+      setFormGender(value);
+    } else if (attribute === "user-occupation") {
+      setFormOccupation(value);
+    } else if (attribute === "user-interests") {
+      setFormInterests(value);
+    }
+  };
+
+  const formatInput = (e) => {
+    const attribute = e.target.name;
+    const value = e.target.value;
+    if (attribute === "user-name") {
+      setFormName(removeWhitespaces(value));
+    } else if (attribute === "user-occupation") {
+      setFormOccupation(removeWhitespaces(value));
+    } else if (attribute === "user-interests") {
+      setFormInterests(removeWhitespaces(value));
     }
   };
 
@@ -111,7 +125,13 @@ export const UserInfoForm = () => {
       </div>
       <div className="form-column form-values">
         {formId && <input name="user-id" value={formId} readOnly></input>}
-        <input name="user-name" required value={formName} onChange={handleChange} />
+        <input
+          name="user-name"
+          required
+          value={formName}
+          onChange={handleChange}
+          onBlur={formatInput}
+        />
         <input
           name="user-age"
           type="number"
@@ -153,8 +173,20 @@ export const UserInfoForm = () => {
             Other
           </label>
         </div>
-        <input name="user-occupation" required value={formOccupation} onChange={handleChange} />
-        <input name="user-interests" required value={formInterests} onChange={handleChange} />
+        <input
+          name="user-occupation"
+          required
+          value={formOccupation}
+          onChange={handleChange}
+          onBlur={formatInput}
+        />
+        <input
+          name="user-interests"
+          required
+          value={formInterests}
+          onChange={handleChange}
+          onBlur={formatInput}
+        />
         <Button label={formId ? "Update" : "Create"} primary={true} type="submit" />
       </div>
     </form>
