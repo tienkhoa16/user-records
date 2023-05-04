@@ -1,8 +1,9 @@
 {
   "name": "user-records-management",
   "version": "0.1.0",
-  "description": "A simple user profile management system allowing CRUD operations",
+  "description": "A user profile management system allowing CRUD operations",
   "author": "Tien Khoa Nguyen <https://ntkhoa.com/>",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",

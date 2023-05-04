@@ -1,8 +1,9 @@
 {
   "name": "user-record-management-server",
   "version": "0.1.0",
-  "description": "A simple user profile management system allowing CRUD operations",
+  "description": "A user profile management system allowing CRUD operations",
   "author": "Tien Khoa Nguyen <https://ntkhoa.com/>",
+  "license": "MIT",
   "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,5 +1,5 @@
 import React from "react";
-import "./user-info-form.css";
+import "./styles/user-info-form.css";
 import { Button } from "./Button";
 import axios from "axios";
 import { useUsersContext } from "../common/contexts/UsersContext";

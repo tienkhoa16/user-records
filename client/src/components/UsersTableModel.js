@@ -1,5 +1,5 @@
 import React from "react";
-import "./users-table-model.css";
+import "./styles/users-table-model.css";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";

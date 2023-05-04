@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+/**
+ * Schema for a user's profile.
+ */
 const UserSchema = new mongoose.Schema(
   {
     id: {
@@ -32,6 +35,10 @@ const UserSchema = new mongoose.Schema(
   { collection: "profiles" }
 );
 
+/**
+ * Schema for an auto-increment counter.
+ * It is used for auto generating the user id.
+ */
 const CounterSchema = new mongoose.Schema(
   {
     id: {
