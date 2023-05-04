@@ -2,12 +2,12 @@
   User-Record Management System
 </h1>
 
-The objective of this project is to create a comprehensive user record management system with CRUD (Create, Read, Update, Delete) functionality using the MERN stack. The system is leverages the usage of MongoDB, Express.js, React.js, and Node.js to provide a seamless user experience.
+The objective of this project is to create a comprehensive user record management system with CRUD (Create, Read, Update, Delete) functionality using the MERN stack. The system leverages the usage of MongoDB, Express.js, React.js, and Node.js to provide a seamless user experience.
 
 ## Demo
 
 <p align="center">
-    <img alt="REST APi" src="./docs/demo.gif" width=600/>
+    <img alt="Demo GIF" src="./docs/demo.gif" width=600/>
 </p>
 
 ## Quick Start
